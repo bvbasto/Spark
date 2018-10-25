@@ -107,3 +107,60 @@ display(dsAvgTmp)
 
 // COMMAND ----------
 
+// display the averages as bar graphs, grouped by the country
+display(dsAvgTmp)
+
+// COMMAND ----------
+
+// Select individual fields using the Dataset method select()
+// where battery_level is greater than 6. Note this high-level
+// domain specific language API reads like a SQL query
+display(ds.select($"battery_level", $"c02_level", $"device_name").where($"battery_level" > 6).sort($"c02_level"))
+
+// COMMAND ----------
+
+// MAGIC %sql select `State Code`, `2015 median sales price` from data_geo where `2015 median sales price` is not null ;
+
+// COMMAND ----------
+
+// MAGIC %python
+// MAGIC # Use the Spark CSV datasource with options specifying:
+// MAGIC # - First line of file is a header
+// MAGIC # - Automatically infer the schema of the data
+// MAGIC data = spark.read.format("csv") \
+// MAGIC   .option("header", "true") \
+// MAGIC   .option("inferSchema", "true") \
+// MAGIC   .load("/databricks-datasets/samples/population-vs-price/data_geo.csv")
+// MAGIC 
+// MAGIC data.cache() # Cache data for faster reuse
+// MAGIC data = data.dropna() # drop rows with missing values
+// MAGIC 
+// MAGIC data = data.withColumnRenamed("State Code","StateCode").withColumnRenamed("2015 median sales price","2015MediaSalesPrice")
+
+// COMMAND ----------
+
+// MAGIC %python
+// MAGIC # Register table so it is accessible via SQL Context
+// MAGIC # For Apache Spark = 2.0
+// MAGIC data.createOrReplaceTempView("data_geo")
+
+// COMMAND ----------
+
+// MAGIC %python
+// MAGIC data.take(10)
+
+// COMMAND ----------
+
+// MAGIC %python
+// MAGIC display(data)
+
+// COMMAND ----------
+
+// MAGIC %sql select StateCode, 2015MediaSalesPrice from data_geo
+
+// COMMAND ----------
+
+// MAGIC %sql describe data_geo
+
+// COMMAND ----------
+
