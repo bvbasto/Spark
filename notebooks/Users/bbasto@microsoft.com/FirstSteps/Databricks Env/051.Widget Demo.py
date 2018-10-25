@@ -2,6 +2,7 @@
 dbutils.fs.rm("dbfs:/babynames.csv")
 dbutils.widgets.remove("year")
 
+
 # COMMAND ----------
 
 import urllib2
@@ -12,6 +13,7 @@ dbutils.fs.put("dbfs:/babynames.csv", csvfile)
 # COMMAND ----------
 
 babynames = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("dbfs:/babynames.csv")
+babynames = babynames.withColumnRenamed("First Name","Name")
 babynames.createOrReplaceTempView("babynames_table")
 
 # COMMAND ----------
