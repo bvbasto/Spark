@@ -12,6 +12,8 @@ dbutils.fs.mount(
 # COMMAND ----------
 
 # MAGIC %fs ls /mnt/MyADLS/
+# MAGIC #dbutils.fs.ls("/mnt/MyADLS")
 
 # COMMAND ----------
 
+dbutils.fs.unmount("/mnt/MyADLS")
