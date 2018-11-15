@@ -404,19 +404,6 @@ csvDF2 = (spark.read                        # The DataFrameReader
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC ## Next Steps
-# MAGIC 
-# MAGIC * Reading Data #1 - CSV
-# MAGIC * [Reading Data #2 - Parquet]($./Reading Data 2 - Parquet)
-# MAGIC * [Reading Data #3 - Tables]($./Reading Data 3 - Tables)
-# MAGIC * [Reading Data #4 - JSON]($./Reading Data 4 - JSON)
-# MAGIC * [Reading Data #5 - Text]($./Reading Data 5 - Text)
-# MAGIC * [Reading Data #6 - JDBC]($./Reading Data 6 - JDBC)
-# MAGIC * [Reading Data #7 - Summary]($./Reading Data 7 - Summary)
-
-# COMMAND ----------
-
 # MAGIC %md-sandbox
 # MAGIC &copy; 2018 Databricks, Inc. All rights reserved.<br/>
 # MAGIC Apache, Apache Spark, Spark and the Spark logo are trademarks of the <a href="http://www.apache.org/">Apache Software Foundation</a>.<br/>
