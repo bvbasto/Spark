@@ -27,7 +27,7 @@ dbutils.fs.mounts()
 
 # COMMAND ----------
 
-# MAGIC %fs ls /mnt/MyADLS/
+# MAGIC %fs ls /mnt/MyADLS_training
 
 # COMMAND ----------
 
