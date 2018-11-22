@@ -18,10 +18,27 @@ df = spark.read \
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC Select * from  jdbcTable2
+display(df)
 
 # COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE TABLE dimProduct
+# MAGIC USING org.apache.spark.sql.jdbc
+# MAGIC OPTIONS (
+# MAGIC   url "jdbc:sqlserver://adwfordatabricksbvb01.database.windows.net:1433;database=adwfordatabricksbvb01;user=testDataBricks;password=Qwerty123456;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
+# MAGIC   dbtable "dbo.DimProduct",
+# MAGIC   user "testDataBricks",
+# MAGIC   password "Qwerty123456"
+# MAGIC )
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC Select * from  dimProduct
+
+# COMMAND ----------
+
 
 df = sqlContext.range(5).toDF("value")
 
