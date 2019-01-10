@@ -21,4 +21,14 @@ dbutils.fs.mount(
 
 # COMMAND ----------
 
-dbutils.fs.ls("/mnt/MyADLS/training")
+dbutils.fs.ls("/mnt/MyADLS/training/_bvb")
+
+# COMMAND ----------
+
+# MAGIC %fs 
+# MAGIC ls /mnt/MyADLS/training
+
+# COMMAND ----------
+
+dbutils.fs.cp("/mnt/MyADLS/training/_bvb/WorldDataBank/WorldDevelopmentIndicators/",
+             "/mnt/MyADLS/training/_bvb/WorldDataBank/WorldDevelopmentIndicators/aula/meunome",recurse = True)
