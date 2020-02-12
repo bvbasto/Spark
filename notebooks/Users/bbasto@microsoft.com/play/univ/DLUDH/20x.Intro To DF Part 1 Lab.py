@@ -1,0 +1,96 @@
+# Databricks notebook source
+# MAGIC %md
+# MAGIC # Introduction to DataFrames, Lab #1
+# MAGIC ## Distinct Articles
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ##![Spark Logo Tiny](https://files.training.databricks.com/images/105/logo_spark_tiny.png) Instructions
+# MAGIC 
+# MAGIC In the cell provided below, write the code necessary to count the number of distinct articles in our data set.
+# MAGIC 0. Copy and paste all you like from the previous notebook.
+# MAGIC 0. Read in our parquet files.
+# MAGIC 0. Apply the necessary transformations.
+# MAGIC 0. Assign the count to the variable `totalArticles`
+# MAGIC 0. Run the last cell to verify that the data was loaded correctly.
+# MAGIC 
+# MAGIC **Bonus**
+# MAGIC 
+# MAGIC If you recall from the beginning of the previous notebook, the act of reading in our parquet files will trigger a job.
+# MAGIC 0. Define a schema that matches the data we are working with.
+# MAGIC 0. Update the read operation to use the schema.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ##![Spark Logo Tiny](https://files.training.databricks.com/images/105/logo_spark_tiny.png) Show Your Work
+
+# COMMAND ----------
+
+# TODO
+# Replace <<FILL_IN>> with your code. 
+
+parquetDir = "/mnt/MyADLS_training/wikipedia/pagecounts/staging_parquet_en_only_clean/"
+
+df = (spark                    # Our SparkSession & Entry Point
+  .read                        # Our DataFrameReader
+  <<FILL_IN>>                  # Read in the parquet files
+  <<FILL_IN>>                  # Reduce the columns to just the one
+  <<FILL_IN>>                  # Produce a unique set of values
+)
+totalArticles = df.<<FILL_IN>> # Identify the total number of records remaining.
+
+print("Distinct Articles: {0:,}".format(totalArticles))
+
+# COMMAND ----------
+
+parquetDir = "/mnt/MyADLS_training/wikipedia/pagecounts/staging_parquet_en_only_clean/"
+
+df= (spark.read              # The DataFrameReader
+  .parquet(parquetDir)  # Creates a DataFrame from Parquet after reading in the file
+)
+
+# COMMAND ----------
+
+display(df)
+
+# COMMAND ----------
+
+df.createOrReplaceTempView("xpto")
+
+# COMMAND ----------
+
+(spark.read             
+  .parquet(parquetDir) 
+  .createOrReplaceTempView("xpto2")
+)
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC 
+# MAGIC SELECT COUNT(*) FROM xpto2
+
+# COMMAND ----------
+
+# MAGIC %fs ls /mnt/MyADLS_training/wikipedia/pagecounts/staging_parquet_en_only_clean/
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ##![Spark Logo Tiny](https://files.training.databricks.com/images/105/logo_spark_tiny.png) Verify Your Work
+# MAGIC Run the following cell to verify that your `DataFrame` was created properly.
+
+# COMMAND ----------
+
+expected = 1783138
+assert totalArticles == expected, "Expected the total to be " + str(expected) + " but found " + str(totalArticles)
+
+# COMMAND ----------
+
+# MAGIC %md-sandbox
+# MAGIC &copy; 2018 Databricks, Inc. All rights reserved.<br/>
+# MAGIC Apache, Apache Spark, Spark and the Spark logo are trademarks of the <a href="http://www.apache.org/">Apache Software Foundation</a>.<br/>
+# MAGIC <br/>
+# MAGIC <a href="https://databricks.com/privacy-policy">Privacy Policy</a> | <a href="https://databricks.com/terms-of-use">Terms of Use</a> | <a href="http://help.databricks.com/">Support</a>
